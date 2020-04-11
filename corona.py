@@ -30,12 +30,13 @@ class COVID19India(object):
         return df
     def statewise(self):
         data=self.__request(self.data_url)
-        delta=pd.DataFrame(data.get('key_values'))
-        statewise=pd.concat([pd.DataFrame(data.get('statewise')),pd.DataFrame([i.get('delta') for i in data.get('statewise')])],axis=1)
-        del statewise["delta"]
+#         delta=pd.DataFrame(data.get('key_values'))
+        statewise=pd.DataFrame(data.get('statewise'))
+#         statewise=pd.concat([pd.DataFrame(data.get('statewise')),pd.DataFrame([i.get('delta') for i in data.get('statewise')])],axis=1)
+#         del statewise["delta"]
         cases_time_series=pd.DataFrame(data.get('cases_time_series'))
         tested=pd.DataFrame(data.get('tested'))
-        return(delta,statewise,cases_time_series,tested)
+        return(statewise,cases_time_series,tested)
     def state_district_data(self):
         state_data = self.__request(self.url_state)
         key1 = state_data.keys()
